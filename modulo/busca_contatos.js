@@ -69,28 +69,6 @@ const getListaDadosProfile = function(numero){
  //console.log(getListaDadosContato('11987876567'))
 
 
-//  const getListaDadosContato = function(numero){
-
-//     let listaContatos = {
-//         contatos: []
-//     }
-
-//     listaDeContatos.contatos['whats-users'].forEach(function(item){
-//         if(item.number == numero){
-//             let dadosContatos = {
-//                 nomeContato: item.contacts.filter(c => c.name),
-//                 fotoContato: item.contacts.filter(c => c.image),
-//                 descricaoContato: item.contacts.filter(c => c.description)
-//             }
-//             listaContatos.contatos.push(dadosContatos)
-//         }else{
-//             return false
-//         }
-//     })
-//     return listaContatos
-//  }
-
-
 //Listar todas as mensagens trocadas de uma conta de usuário
 //(Retornar todos os dados)
 
@@ -154,21 +132,20 @@ const getConversasUsuario = function(numero, nomeContato){
 // respectivo contato
 
 const getMensagensFiltradas = function(numeroUsuario, nomeContato, palavraChave) {
-    // 1. Localiza o usuário dono da conta [2, 3]
+    //Localiza o usuário dono da conta 
     const usuario = listaDeContatos.contatos['whats-users'].find(item => item.number == numeroUsuario)
 
     if (usuario) {
-        // 2. Localiza o contato específico na lista do usuário [2]
+        //Localiza o contato específico na lista do usuário 
         const contato = usuario.contacts.find(c => c.name.toLowerCase() == nomeContato.toLowerCase())
 
         if (contato) {
-            // 3. Filtra as mensagens que contêm a palavra-chave [1]
-            // Usamos .toLowerCase() para tornar a busca insensível a maiúsculas [4]
+            //Filtra as mensagens que contêm a palavra-chave 
             const mensagensFiltradas = contato.messages.filter(function(mensagem) {
                 return mensagem.content.toLowerCase().includes(palavraChave.toLowerCase())
             })
 
-            // 4. Retorna o objeto formatado com os dados solicitados [5]
+            //Retorna o objeto formatado com os dados solicitados
             return {
                 usuario: usuario.account,        
                 contato: contato.name,
@@ -180,4 +157,13 @@ const getMensagensFiltradas = function(numeroUsuario, nomeContato, palavraChave)
     }
     return false
 }
-console.log(getMensagensFiltradas("11955577796", "Peter Wilsen",  "bem"))
+//console.log(getMensagensFiltradas("11955577796", "Peter Wilsen",  "bem"))
+
+module.exports = {
+    getListaDadosUsuario,
+    getListaDadosProfile,
+    getListaDadosContato,
+    getTodasMensagensUsuario,
+    getConversasUsuario,
+    getMensagensFiltradas
+}
