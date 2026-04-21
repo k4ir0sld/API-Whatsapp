@@ -57,11 +57,13 @@ const getListaDadosProfile = function(numero){
     })
 
     if(contatos){
-        return{
-            nomeContato: contatos.contacts.filter(c => c.name),
-            fotoContato: contatos.contacts.filter(c => c.image),
-            descricaoContato: contatos.contacts.filter(c => c.description)
+    return contatos.contacts.map(function(c){
+        return {
+            nome:     c.name,
+            foto:     c.image,
+            descricao: c.description
         }
+    })
     }
     return false
  }
